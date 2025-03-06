@@ -1,6 +1,7 @@
 "use client";
 
 import { FigmaFrameCopier } from "@/components/FigmaFrameCopier";
+import { FigmaClipboardCopy } from "@/components/FigmaFrameCopierV2";
 import { useState } from "react";
 
 export default function Home() {
@@ -28,6 +29,7 @@ export default function Home() {
         />
       </div>
       <FigmaFrameCopier fileKey={fileKey} frameId={frameId} />
+      {/* <FigmaClipboardCopy /> */}
     </div>
   );
 }

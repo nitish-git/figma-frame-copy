@@ -24,13 +24,16 @@ const FigmaFrameCopier = ({
       );
 
       const data = await response.json();
-      //   const frameData = data.nodes[frameId];
+      const frameData = data.nodes[frameId];
 
-      // Copy frame data to clipboard
-      await navigator.clipboard.writeText(JSON.stringify(data));
+      // Ensure Figma recognizes it
+      const clipboardItem = new ClipboardItem({
+        "application/json": new Blob([JSON.stringify(frameData)], {
+          type: "applicaiton/json",
+        }),
+      });
+      await navigator.clipboard.write([clipboardItem]);
 
-      // Update button state
-      setCopyStatus("Copied!");
       setTimeout(() => setCopyStatus("Copy Frame"), 2000);
     } catch (error) {
       console.error("Error copying Figma frame:", error);
