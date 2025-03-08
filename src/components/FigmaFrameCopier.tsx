@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Copy } from "lucide-react";
+import { Copy, LoaderCircle, ClipboardCheck } from "lucide-react";
+import { Loader } from "next/dynamic";
 
 const FigmaFrameCopier = ({
   fileKey = "",
@@ -13,9 +14,10 @@ const FigmaFrameCopier = ({
 
   const copyFigmaFrame = async () => {
     try {
+      setCopyStatus("Copying");
       // Fetch frame details from Figma
       const response = await fetch(
-        `https://api.figma.com/v1/files/${fileKey}/nodes?ids=${frameId}`,
+        `https://api.figma.com/v1/images/${fileKey}?ids=${frameId}&format=svg`,
         {
           headers: {
             "X-Figma-Token": FIGMA_ACCESS_TOKEN,
@@ -24,17 +26,13 @@ const FigmaFrameCopier = ({
       );
 
       const data = await response.json();
-      const frameData = data.nodes[frameId];
+      const imageURL = data.images[frameId];
 
-      // Ensure Figma recognizes it
-      const clipboardItem = new ClipboardItem({
-        "application/json": new Blob([JSON.stringify(frameData)], {
-          type: "applicaiton/json",
-        }),
-      });
-      await navigator.clipboard.write([clipboardItem]);
+      const response2 = await fetch(imageURL);
+      const frameData = await response2.text();
+      await navigator.clipboard.writeText(frameData);
 
-      setTimeout(() => setCopyStatus("Copy Frame"), 2000);
+      setCopyStatus("Copied!");
     } catch (error) {
       console.error("Error copying Figma frame:", error);
       setCopyStatus("Error");
@@ -47,7 +45,11 @@ const FigmaFrameCopier = ({
         onClick={copyFigmaFrame}
         className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition flex items-center"
       >
-        <Copy className="mr-2" />
+        {copyStatus === "Copy Frame" && <Copy className="mr-2" />}
+        {copyStatus === "Copying" && (
+          <LoaderCircle className="mr-2 animate-spin" />
+        )}
+        {copyStatus === "Copied!" && <ClipboardCheck className="mr-2" />}
         {copyStatus}
       </button>
     </div>
