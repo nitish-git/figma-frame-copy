@@ -18,4 +18,4 @@ jobs:
       - name: Install dependency
         run: npm install
       - name: Run development server
-        run: npm run start
+        run: npm run dev
