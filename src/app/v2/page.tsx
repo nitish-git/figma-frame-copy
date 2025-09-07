@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FigmaFrameCopierButtonV2 } from "@/components/FigmaFrameCopierButtonV2";
 import { figmaFrames } from "./_frames";
 
-function Page({ frame }: { frame: string }) {
+function Page() {
   return (
     <div className="grid grid-cols-3 gap-4 m-4">
       <div className="group rounded aspect-square border border-gray-300 flex items-center justify-center bg-[url(/FigmaFrame1.png)] bg-contain bg-no-repeat bg-center">
