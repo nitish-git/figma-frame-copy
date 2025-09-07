@@ -14,13 +14,6 @@ function Page() {
           </div>
         </div>
       </div>
-      <div className="group rounded aspect-square border border-gray-300 flex items-center justify-center bg-[url(/FigmaFrame1.png)] bg-contain bg-no-repeat bg-center">
-        <div className="flex flex-col items-center justify-center hover:bg-gray-300/70 w-full h-full">
-          <div className="hidden group-hover:flex">
-            <FigmaFrameCopierButtonV2 frame={figmaFrames[0]} />
-          </div>
-        </div>
-      </div>
       <div className="group rounded aspect-square border border-gray-300 flex items-center justify-center bg-[url(/FigmaFrame2.png)] bg-contain bg-no-repeat bg-center">
         <div className="flex flex-col items-center justify-center hover:bg-gray-300/70 w-full h-full">
           <div className="hidden group-hover:flex">
