@@ -3,6 +3,8 @@ name: npm-react ci piplene
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   build:
@@ -17,5 +19,5 @@ jobs:
           node-version: "18"
       - name: Install dependency
         run: npm install
-      - name: Run development server
-        run: npm run dev
+      - name: build development server
+        run: npm run build
